@@ -5,6 +5,19 @@ set -o nounset
 set -o pipefail
 trap "exit" INT
 
+### Next.js
+
+# Removes "Anonymous function declarations cause Fast Refresh to not preserve local component state. Please add a name to your function." warning.
+# Reason: https://github.com/vercel/next.js/issues/15696
+sed -i.bak 's/warn=onWarning;/warn=function(){};/g' node_modules/next/dist/build/babel/plugins/no-anonymous-default-export.js
+
+# Removes "<title> should not be used in _document.js" warning.
+# Reason: We want title and other SEO tags to be pre-rendered, so that crawlers could find them.
+sed -i.bak "s|console.warn(\"Warning: <title> should not be used in _document.js's <Head>. https://err.sh/next.js/no-document-title\");||g" node_modules/next/dist/pages/_document.js
+
+
+### Auspice
+
 # Removes CSS imports
 # Reason: Next.js forbids CSS imports outside `_app.js`.
 sed -i.bak '/import "\.\.\/\.\.\/css\/awesomplete\.css";/d' node_modules/auspice/src/components/controls/search.js
@@ -25,3 +38,5 @@ sed -i.bak  's/docHeight: window.document.body.clientHeight/docHeight: 0,/g' nod
 # Removes warning when `geoResolutions` is undefined in input data
 # Reason: We don't use geo resolutions and this warning is irrelevant for our application
 sed -i.bak  '/console.warn("JSONs did not include `geoResolutions`");/d' node_modules/auspice/src/actions/recomputeReduxState.js
+
+

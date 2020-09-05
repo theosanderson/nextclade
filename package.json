@@ -1,0 +1,13 @@
+{
+  "name": "@neherlab/webclades-root",
+  "version": "0.4.0",
+  "license": "MIT",
+  "workspaces": ["packages/*"],
+  "private": true,
+  "scripts": {
+    "dev": "bash packages/patches/patch.sh && lerna exec --parallel --scope=@neherlab/nextclade{,-web} -- yarn dev"
+  },
+  "devDependencies": {
+    "lerna": "3.22.1"
+  }
+}

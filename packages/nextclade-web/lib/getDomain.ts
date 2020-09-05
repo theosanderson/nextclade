@@ -1,5 +1,5 @@
 /* eslint-disable lodash/prefer-is-nil */
-import isInteractive from 'is-interactive'
+import isCI from '@npmcli/ci-detect'
 
 import { getenv } from './getenv'
 
@@ -52,7 +52,7 @@ export function getDomain() {
   let DOMAIN = getenv('FULL_DOMAIN')
 
   if (DOMAIN === 'autodetect') {
-    const interactive = isInteractive()
+    const interactive = !isCI()
 
     if (interactive && process.env.NODE_ENV === 'development') {
       return devDomain

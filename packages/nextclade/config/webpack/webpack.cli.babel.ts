@@ -6,9 +6,9 @@ import ExtraWatchWebpackPlugin from 'extra-watch-webpack-plugin'
 import webpack from 'webpack'
 
 import { findModuleRoot } from '../../lib/findModuleRoot'
-import { getEnvVars } from '../next/lib/getEnvVars'
 import { WebpackChmodPlugin } from './lib/webpackChmod'
 
+import { getEnvVars } from './lib/getEnvVars'
 import webpackIgnoreModules from './lib/webpackIgnoreModules'
 import webpackLoadRaw from './lib/webpackLoadRaw'
 import webpackLoadJavascript from './lib/webpackLoadJavascript'

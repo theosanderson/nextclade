@@ -3,7 +3,6 @@
   "legacyWatch": false,
   "delay": 0.1,
   "watch": [
-    "../.env",
     ".browserslistrc",
     ".editorconfig",
     ".env",
@@ -15,23 +14,15 @@
     "config",
     "package.json",
     "postcss.config.js",
-    "schemas",
     "src",
     "static",
     "stylelint.config.js",
     "tsconfig.json",
+    "tslint.json",
     "webpack.config.js",
     "yarn.lock"
   ],
   "ext": "js,jsx,ts,tsx,json,flow,css,scss,sass,styl,html,ejs,d,txt,yml,sh",
-  "ignore": [
-    "**/*.test.*s",
-    "**/*.test.*sx",
-    "**/__tests__",
-    ".build",
-    "config/jest",
-    "node_modules",
-    "src/.generated"
-  ],
-  "exec": "run-s -c clear prod:clean prod:start || cd ."
+  "ignore": [".build", "node_modules", "**/__tests__", "**/*.test.*sx", "**/*.test.*s"],
+  "exec": "run-s -c prod:clean prod:build || cd ."
 }

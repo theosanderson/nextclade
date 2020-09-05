@@ -3,6 +3,7 @@
   "legacyWatch": false,
   "delay": 0.1,
   "watch": [
+    "../.env",
     ".browserslistrc",
     ".editorconfig",
     ".env",
@@ -12,17 +13,16 @@
     ".prettierrc",
     "babel.config.js",
     "config",
+    "next.config.js",
     "package.json",
     "postcss.config.js",
-    "src",
-    "static",
+    "schemas",
     "stylelint.config.js",
     "tsconfig.json",
-    "tslint.json",
     "webpack.config.js",
     "yarn.lock"
   ],
   "ext": "js,jsx,ts,tsx,json,flow,css,scss,sass,styl,html,ejs,d,txt,yml,sh",
-  "ignore": [".build", "node_modules", "**/__tests__", "**/*.test.*sx", "**/*.test.*s"],
-  "exec": "run-s -c cli:prod:clean cli:prod:build || cd ."
+  "ignore": ["**/*.test.*s", "**/*.test.*sx", "**/__tests__", ".build", "config/jest", "node_modules"],
+  "exec": "run-s -c dev:clean dev:start || cd ."
 }
