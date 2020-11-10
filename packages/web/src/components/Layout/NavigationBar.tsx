@@ -1,8 +1,12 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { connect } from 'react-redux'
-import { FaDocker, FaGithub, FaNpm, FaTwitter } from 'react-icons/fa'
+import { FaDocker, FaGithub, FaHome, FaNpm, FaTable, FaTree, FaTwitter } from 'react-icons/fa'
+import { Nav, NavItem } from 'reactstrap'
+import { TreeIcon } from 'src/components/Tree/TreeIcon'
+
+import { WhatsNewButton } from 'src/components/WhatsNew/WhatsNewButton'
 
 import { State } from 'src/state/reducer'
 import { selectPathname } from 'src/state/router/router.selectors'
@@ -14,6 +18,7 @@ import { ReactComponent as BrandLogo } from 'src/assets/img/nextstrain_logo.svg'
 
 import { LanguageSwitcher } from './LanguageSwitcher'
 import { NavigationLogo } from './NavigationLogo'
+import { NavigationLink } from './NavigationLink'
 
 export interface NavigationBarProps {
   pathname: string
@@ -29,6 +34,30 @@ export const NavigationBar = connect(mapStateToProps, mapDispatchToProps)(Naviga
 
 export function NavigationBarDisconnected({ pathname }: NavigationBarProps) {
   const { t } = useTranslation()
+
+  const navLinksLeft = useMemo(
+    () => [
+      {
+        title: t('Home'),
+        url: '/',
+        alt: t('Go to home page'),
+        icon: <FaHome size={20} color="#aaa" />,
+      },
+      {
+        title: t('Results'),
+        url: '/results',
+        alt: t('Go to results page'),
+        icon: <FaTable size={20} color="#aaa" />,
+      },
+      {
+        title: t('Tree'),
+        url: '/tree',
+        alt: t('Go to tree page'),
+        icon: <TreeIcon />,
+      },
+    ],
+    [t],
+  )
 
   const navLinksRight = useMemo(
     () => [
@@ -70,6 +99,15 @@ export function NavigationBarDisconnected({ pathname }: NavigationBarProps) {
         <BrandLogo className="navigation-bar-product-logo" />
         <NavigationLogo />
       </Link>
+
+      <ul className="navbar-nav mr-auto d-flex">
+        {navLinksLeft.map(({ title, url, alt, icon }) => (
+          <NavigationLink key={url} url={url} alt={alt}>
+            <span>{icon}</span>
+            <span>{title}</span>
+          </NavigationLink>
+        ))}
+      </ul>
 
       <ul className="navbar-nav ml-auto d-flex">
         <li className="nav-item mx-2 my-auto">

@@ -9,7 +9,7 @@ export interface NavigationLinkProps extends PropsWithChildren<HTMLProps<HTMLDat
   url: string
 }
 
-export default function NavigationLink({ active, url, children }: NavigationLinkProps) {
+export function NavigationLink({ active, url, children }: NavigationLinkProps) {
   return (
     <li className={classNames('nav-item', active && 'active')}>
       <Link className="nav-link" href={url}>
